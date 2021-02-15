@@ -10,11 +10,11 @@
                   <div class="panel-body">
 
                       <h1>Your Ghin Handicap: {{$handicap}}</h1>
-                      @role('score_poster')
+                      @if(Auth::user()->hasRole('score_poster') || Auth::user()->hasRole('admin'))
                       <p>
                         <a href="{--route('add.score')--}"><button class="btn-success btn-sm" id="btn-add"><i class="fa fa-plus-circle"></i> Add Score</button></a>
                       </p>
-                      @endrole
+                      @endif
                       <div class="table-responsive">
                         <table id="example" class="display dt-responsive table-responsive nowrap" cellspacing="0" width="100%">
                           <thead>
@@ -32,10 +32,7 @@
                                 Course
                               </th>
                               <th>
-                                Tees
-                              </th>
-                              <th>
-                                CR/Slope
+                                Tee
                               </th>
                             </tr>
                           </thead>
@@ -57,9 +54,6 @@
                               </td>
                               <td>
                                 {{$score->tees}}
-                              </td>
-                              <td>
-                                {{$score->course_info}}
                               </td>
                             </tr>
 

@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+
+class User extends \TCG\Voyager\Models\User
 {
     use HasFactory, Notifiable;
 
@@ -49,13 +50,15 @@ class User extends Authenticatable
 
         $course = Course::where('id', '=', $score->course_id)->first();
 
-        if($course){
+        $tee =  Tee::where('id', '=', $score->tee)->first();
 
-        $diffScore = ($score->score - $course->course_rating) * 113/$course->slope;
+        if($course && $tee){
+
+        $diffScore = ($score->score - $tee->rating) * 113/$tee->slope;
         $score->diffScore = round($diffScore, 1);
-        $score->course = $course->course_name;
-        $score->tees = $course->tee_color;
-        $score->course_info = $course->course_rating.'/'.$course->slope;
+        $score->course = $course->name;
+        $score->tees = $tee->gender. " - " . $tee->tee_name . " - " . $tee->rating.'/'.$tee->slope;
+        //$score->course_info = $course->rating.'/'.$course->slope;
 
         }
       }
@@ -66,9 +69,9 @@ class User extends Authenticatable
 
       foreach($handicapScores as $postedScore){
 
-        $course = Course::where('id', '=', $postedScore->course_id)->first();
+        $course = Tee::where('id', '=', $postedScore->tee)->first();
         if($course){
-          $diffScore = ($postedScore->score - $course->course_rating) * 113/$course->slope;
+          $diffScore = ($postedScore->score - $course->rating) * 113/$course->slope;
           $diffArray[] = $diffScore;
         }
 

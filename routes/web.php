@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +15,11 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('home');
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/scrape', [HomeController::class, 'scrape'])->name('scrape');
 
 Auth::routes();
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

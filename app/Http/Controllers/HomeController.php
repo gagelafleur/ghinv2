@@ -29,7 +29,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    /*public function index()
+    public function scrape()
     {
       //https://ncrdb.usga.org/courseTeeInfo.aspx?CourseID=30767
       //$start = 0;
@@ -175,10 +175,10 @@ class HomeController extends Controller
 
       }
 
-        return view('home');
+        return view('scrape');
     }
 
-    public function index_replace()
+    /*public function index_replace()
     {
       return view('home');
     }*/
@@ -196,16 +196,22 @@ class HomeController extends Controller
           }
 
          $scores = Score::where('user_id', '=', $user->id)->orderBy('played_on', 'desc')->get();
-
+         //dd($scores);
          foreach($scores as &$score){
 
            $course = Course::where('id', '=', $score->course_id)->first();
 
-           $diffScore = ($score->score - $course->course_rating) * 113/$course->slope;
-           $score->diffScore = round($diffScore, 1);
-           $score->course = $course->course_name;
-           $score->tees = $course->tee_color;
-           $score->course_info = $course->course_rating.'/'.$course->slope;
+           $tee =  Tee::where('id', '=', $score->tee)->first();
+
+           if($course && $tee){
+
+             $diffScore = ($score->score - $tee->rating) * 113/$tee->slope;
+             $score->diffScore = round($diffScore, 1);
+             $score->course = $course->name;
+             $score->tees = $tee->gender. " - " . $tee->tee_name . " - " . $tee->rating.'/'.$tee->slope;
+             //$score->course_info = $course->rating.'/'.$course->slope;
+
+           }
          }
 
          $handicapScores = Score::where('user_id', '=', $user->id)->orderBy('played_on', 'desc')->take(20)->get();
@@ -214,10 +220,11 @@ class HomeController extends Controller
 
          foreach($handicapScores as $postedScore){
 
-           $course = Course::where('id', '=', $postedScore->course_id)->first();
-
-           $diffScore = ($postedScore->score - $course->course_rating) * 113/$course->slope;
-           $diffArray[] = $diffScore;
+           $course = Tee::where('id', '=', $postedScore->tee)->first();
+           if($course){
+             $diffScore = ($postedScore->score - $course->rating) * 113/$course->slope;
+             $diffArray[] = $diffScore;
+           }
 
          }
          $handicap = $user->getHandicap();
