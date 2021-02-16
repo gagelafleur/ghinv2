@@ -73,7 +73,8 @@ $(document).ready(function() {
   $.noConflict();
   var table = $('#example').DataTable({
 
-    responsive: true
+    responsive: true,
+    autoWidth: false
 
   });
   table.order( [[ 0, 'desc' ]] ).draw();
