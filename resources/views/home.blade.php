@@ -16,7 +16,8 @@
                       </p>
                       @endif
                       <div class="table-responsive">
-                        <table id="example" class="display dt-responsive table-responsive nowrap" cellspacing="0" width="100%">
+                        <!-- <table id="example" class="display dt-responsive table-responsive nowrap" cellspacing="0" width="100%"> -->
+                        <table id="example" class="display dt-responsive table">
                           <thead>
                             <tr>
                               <th>

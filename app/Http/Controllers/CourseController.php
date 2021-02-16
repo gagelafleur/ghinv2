@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use DB;
 
 class CourseController extends Controller
 {
@@ -16,10 +17,12 @@ class CourseController extends Controller
   {
 
       $query = $request->q;
-
-      $data = Course::select("id","name")
+      //"name","city","state")
+      $data = Course::select("id",DB::raw("CONCAT(courses.name, ' - ' , courses.city, ', ', courses.state) as name"))
               ->where("name","LIKE","%".$query."%")
               ->get();
+
+      //$data->name = $data->name . " - " . $data->city . ", " .  $data->state;
 
       return response()->json($data);
   }
