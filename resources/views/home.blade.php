@@ -67,3 +67,16 @@
       </div>
   </div>
 @endsection
+@section('scripts')
+<script type="text/javascript">
+$(document).ready(function() {
+  $.noConflict();
+  var table = $('#example').DataTable({
+
+    responsive: true
+
+  });
+  table.order( [[ 0, 'desc' ]] ).draw();
+});
+</script>
+@endsection
