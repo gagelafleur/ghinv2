@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Course;
-use App\Models\Tee;
 use Auth;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests;
 use App\Models\User;
 use App\Models\Score;
-
+use App\Models\Course;
+use App\Models\Tee;
 
 class HomeController extends Controller
 {

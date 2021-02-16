@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\TeeController;
 
 
 /*
@@ -23,3 +26,8 @@ Auth::routes();
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('/score/add', [ScoreController::class, 'getAddScore'])->name('score.add');
+Route::post('/score/save', [ScoreController::class, 'postSaveCourse'])->name('score.save');
+Route::get('/course/autocomplete', [CourseController::class, 'autocomplete'])->name('autocomplete');
+Route::get('/tees/view', [TeeController::class, 'view'])->name('tees.json');

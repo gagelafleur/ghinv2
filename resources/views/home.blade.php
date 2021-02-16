@@ -12,7 +12,7 @@
                       <h1>Your Ghin Handicap: {{$handicap}}</h1>
                       @if(Auth::user()->hasRole('score_poster') || Auth::user()->hasRole('admin'))
                       <p>
-                        <a href="{--route('add.score')--}"><button class="btn-success btn-sm" id="btn-add"><i class="fa fa-plus-circle"></i> Add Score</button></a>
+                        <a href="{{route('score.add')}}"><button class="btn-success btn-sm" id="btn-add"><i class="fa fa-plus-circle"></i> Add Score</button></a>
                       </p>
                       @endif
                       <div class="table-responsive">
