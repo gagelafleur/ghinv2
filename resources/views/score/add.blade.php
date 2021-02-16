@@ -8,7 +8,7 @@
   </style>
   <div class="container">
       <div class="row">
-          <div class="col-md-10 col-md-offset-1">
+          <div class="col-md-10 mx-auto">
               <div class="panel panel-default">
                   <div class="panel-heading">Dashboard</div>
 
@@ -22,7 +22,7 @@
                       <br /><br />
 
                       <label for="date">Date:</label>
-                      <input class="form-control" type="date" name="date" value="">
+                      <input class="form-control" type="date" name="date" value="" id="datePicker">
                       <br /><br />
 
                       <label for="course">Course</label> | <a href = "javascript:void(0)" class = "typeahead-clear">clear</a>
@@ -53,6 +53,9 @@
 
                       $( document ).ready(function() {
                         var defaultSet = false;
+
+                        $('#datePicker').val(new Date().toDateInputValue());
+
                         $input.typeahead({
                           source:  function (query, process) {
                           return $.get(coursePath, { q: query }, function (data) {
@@ -121,7 +124,12 @@
 
                                     var optionText = value.gender + " - " + value.tee_name + " - " + value.rating + "/"+value.slope;
                                     var optionValue = value.id;
-                                    var o = new Option(optionText, optionValue);
+                                    if(value.id == 135688){
+                                      var o = new Option(optionText, optionValue, false, true);
+                                    }else{
+                                      var o = new Option(optionText, optionValue);
+                                    }
+
                                     //$(o).html("option text");
                                     $teesSelect.append(o);
                                   });
@@ -143,6 +151,12 @@
                         } else {
                           // Nothing is active so it is a new value (or maybe empty value)
                         }
+                      });
+
+                      Date.prototype.toDateInputValue = (function() {
+                          var local = new Date(this);
+                          local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+                          return local.toJSON().slice(0,10);
                       });
                   </script>
               </div>
