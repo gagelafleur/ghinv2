@@ -25,6 +25,18 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $date = Carbon::now()->toW3cString();
+        $environment = env('APP_ENV');
+        //$schedule->command('backup:clean')->daily()->at('01:00');
+        if($environment === "production"){
+          $schedule->command('backup:run');
+          Mail::raw('ghin.io database backup ran successfully',  function($message){
+               $message->from('support@ghin.io', "ghin.io support");
+               $message->subject("ghin.io database backup ran successfully");
+               $message->to(env('ADMIN_EMAIL'));
+           });
+        }
+
     }
 
     /**
