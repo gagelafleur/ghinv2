@@ -10903,6 +10903,21 @@ a.text-dark:focus {
   }
 }
 
+#add-score {
+  position: relative;
+}
+
+#add-score .typeahead.dropdown-menu {
+  max-width: 100%;
+}
+
+@media (max-width: 991.98px) {
+  #add-score .typeahead.dropdown-menu li a {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
 .panel {
   margin-bottom: 20px;
   background-color: #fff;

@@ -1,3 +1,18 @@
+#add-score{
+  position: relative;
+
+  .typeahead.dropdown-menu{
+    max-width: 100%;
+    li a{
+      @include media-breakpoint-down(md) {
+          max-width: 100%;
+          white-space: normal;
+      }
+
+    }
+  }
+}
+
 .panel {
   margin-bottom: 20px;
   background-color: #fff;

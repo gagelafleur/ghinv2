@@ -14,7 +14,7 @@
 
                   <div class="panel-body">
 
-                    <form action="{{route('score.save')}}" method = "post" class = "hideinit">
+                    <form action="{{route('score.save')}}" method = "post" class = "hideinit" id = "add-score">
 
 
                       <label for="score">Score:</label>
