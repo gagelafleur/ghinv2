@@ -91,7 +91,7 @@ class ScoreController extends Controller
 
       $accessingUser = Auth::User();
 
-      if(!$accessingUser->hasRole('score_poster')){
+      if($accessingUser && !$accessingUser->hasRole('score_poster')){
         abort(403);
       }
 
