@@ -32,7 +32,6 @@ return [
     | choice installed on your machine before you begin development.
     |
     */
-    //'url' => env('DATABASE_URL'),
 
     'connections' => [
 
@@ -46,12 +45,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-
-            'host' => env('DB_HOST') ?: $_SERVER['RDS_HOSTNAME'],
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE') ?: $_SERVER['RDS_DB_NAME'],
-            'username' => env('DB_USERNAME') ?: $_SERVER['RDS_USERNAME'],
-            'password' => env('DB_PASSWORD') ?: $_SERVER['RDS_PASSWORD'],
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
