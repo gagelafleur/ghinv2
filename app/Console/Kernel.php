@@ -29,8 +29,8 @@ class Kernel extends ConsoleKernel
         $environment = env('APP_ENV');
         //$schedule->command('backup:clean')->daily()->at('01:00');
         if($environment === "production"){
-          $schedule->command('backup:clean')->daily()->at('01:00');
-          $schedule->command('backup:run')->daily()->at('01:30');
+          //$schedule->command('backup:clean')->daily()->at('01:00');
+          //$schedule->command('backup:run')->daily()->at('01:30');
           //$schedule->command('backup:run')->daily()->at('10:20');
           /*$schedule->command('backup:run');
           Mail::raw('ghin.io database backup ran successfully',  function($message){
